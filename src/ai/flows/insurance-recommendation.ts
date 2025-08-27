@@ -13,7 +13,7 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const InsuranceRecommendationInputSchema = z.object({
-  userData: z.string().describe('User-provided data, including age, income, family status, and coverage needs.'),
+  userData: z.string().describe('User-provided data, including age, income, family status, coverage needs, email, phone number, car type, and car value.'),
   insuranceType: z.string().describe('The type of insurance being sought (e.g., life, health, auto).'),
   marketConditions: z.string().describe('Current market conditions for the specified insurance type.'),
 });

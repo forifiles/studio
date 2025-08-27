@@ -20,6 +20,10 @@ const formSchema = z.object({
   coverageNeeds: z.string().min(10, 'Please describe your needs'),
   insuranceType: z.enum(['life', 'motor', 'travel', 'health', 'education']),
   marketConditions: z.string().min(10, 'Please describe market conditions'),
+  email: z.string().email('Please enter a valid email.'),
+  phone: z.string().min(10, 'Please enter a valid phone number.'),
+  carType: z.string().optional(),
+  carValue: z.coerce.number().optional(),
 });
 
 type InsuranceFormProps = {
@@ -39,14 +43,22 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
       coverageNeeds: 'Looking for comprehensive coverage with a balance of cost and benefits.',
       insuranceType: 'health',
       marketConditions: 'Stable market with competitive pricing from various providers.',
+      email: '',
+      phone: '',
     },
   });
+
+  const insuranceType = form.watch('insuranceType');
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     setRecommendations(null);
 
-    const userData = `Age: ${values.age}, Annual Income: $${values.income}, Family Status: ${values.familyStatus}, Coverage Needs: ${values.coverageNeeds}`;
+    let userData = `Age: ${values.age}, Annual Income: $${values.income}, Family Status: ${values.familyStatus}, Coverage Needs: ${values.coverageNeeds}, Email: ${values.email}, Phone: ${values.phone}`;
+
+    if (values.insuranceType === 'motor') {
+      userData += `, Car Type: ${values.carType}, Car Value: $${values.carValue}`;
+    }
     
     try {
       const result = await getInsuranceRecommendations({
@@ -104,6 +116,34 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+               <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="e.g., you@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input type="tel" placeholder="e.g., 123-456-7890" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="familyStatus"
@@ -152,6 +192,38 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
                 )}
               />
             </div>
+
+            {insuranceType === 'motor' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="carType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Type of Car</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., Toyota Camry" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="carValue"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Value of Car</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="e.g., 20000" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+
             <FormField
               control={form.control}
               name="coverageNeeds"
