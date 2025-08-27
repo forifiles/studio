@@ -19,7 +19,6 @@ const formSchema = z.object({
   familyStatus: z.enum(['single', 'married', 'married_with_children', 'single_parent']),
   coverageNeeds: z.string().min(10, 'Please describe your needs'),
   insuranceType: z.enum(['life', 'motor', 'travel', 'health', 'education']),
-  marketConditions: z.string().min(10, 'Please describe market conditions'),
   email: z.string().email('Please enter a valid email.'),
   phone: z.string().min(10, 'Please enter a valid phone number.'),
   carType: z.string().optional(),
@@ -42,7 +41,6 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
       familyStatus: 'single',
       coverageNeeds: 'Looking for comprehensive coverage with a balance of cost and benefits.',
       insuranceType: 'health',
-      marketConditions: 'Stable market with competitive pricing from various providers.',
       email: '',
       phone: '',
       carType: '',
@@ -66,7 +64,6 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
       const result = await getInsuranceRecommendations({
         userData,
         insuranceType: values.insuranceType,
-        marketConditions: values.marketConditions,
       });
       setRecommendations(result);
     } catch (e) {
@@ -234,19 +231,6 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
                   <FormLabel>Coverage Needs</FormLabel>
                   <FormControl>
                     <Textarea placeholder="Describe what you are looking for..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-             <FormField
-              control={form.control}
-              name="marketConditions"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Market Conditions</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="e.g., Stable market with competitive pricing..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
