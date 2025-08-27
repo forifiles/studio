@@ -6,7 +6,7 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-8 h-8 text-primary" />
-          <h1 className="text-2xl font-bold font-headline text-primary">AssureView</h1>
+          <h1 className="text-2xl font-bold font-headline text-primary">Compare Africa</h1>
         </div>
       </div>
     </header>

@@ -44,13 +44,13 @@ const prompt = ai.definePrompt({
   output: {
     schema: InsuranceRecommendationOutputSchema
   },
-  prompt: `You are an expert insurance advisor. Analyze the user data, insurance type, and current market conditions to recommend the three best insurance options for the user.
+  prompt: `You are an expert insurance advisor specializing in the Nigerian market. Analyze the user data, insurance type, and current market conditions to recommend the three best insurance options for the user in Nigeria.
 
 User Data: {{{userData}}}
 Insurance Type: {{{insuranceType}}}
 Market Conditions: {{{marketConditions}}}
 
-Provide the recommendations in a clear and concise format, including the insurance provider, policy name, coverage details, premium, and reasoning for each recommendation. Ensure the recommendations align with the user's needs and current market trends. Only provide 3 top recommendations. Do not start with an introduction or greeting. Do not include a conclusion. Start immediately with the first recommendation and continue to the second and third.
+Provide the recommendations in a clear and concise format, including the insurance provider, policy name, coverage details, premium, and reasoning for each recommendation. Ensure the recommendations align with the user's needs and current market trends in Nigeria. Only provide 3 top recommendations. Do not start with an introduction or greeting. Do not include a conclusion. Start immediately with the first recommendation and continue to the second and third.
 `,
 });
 

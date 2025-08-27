@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'AssureView',
-  description: 'Find Your Perfect Insurance Plan',
+  title: 'Compare Africa',
+  description: 'Compare Insurance Plans in Nigeria',
 };
 
 export default function RootLayout({
