@@ -45,6 +45,8 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
       marketConditions: 'Stable market with competitive pricing from various providers.',
       email: '',
       phone: '',
+      carType: '',
+      carValue: 0,
     },
   });
 
@@ -202,7 +204,7 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
                     <FormItem>
                       <FormLabel>Type of Car</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Toyota Camry" {...field} />
+                        <Input placeholder="e.g., Toyota Camry" {...field} value={field.value ?? ''} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -215,7 +217,7 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
                     <FormItem>
                       <FormLabel>Value of Car</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="e.g., 20000" {...field} />
+                        <Input type="number" placeholder="e.g., 20000" {...field} value={field.value ?? 0} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
