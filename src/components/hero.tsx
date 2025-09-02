@@ -6,6 +6,9 @@ import type { InsuranceRecommendationOutput } from '@/ai/flows/insurance-recomme
 import RecommendationCard from './recommendation-card';
 import { Loader2 } from 'lucide-react';
 import RecommendationDetails from './recommendation-details';
+import { Button } from './ui/button';
+import ComparisonView from './comparison-view';
+import { useToast } from '@/hooks/use-toast';
 
 type Recommendation = InsuranceRecommendationOutput['recommendations'][0];
 
@@ -13,6 +16,9 @@ const Hero = () => {
   const [recommendations, setRecommendations] = useState<InsuranceRecommendationOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRecommendation, setSelectedRecommendation] = useState<Recommendation | null>(null);
+  const [comparisonList, setComparisonList] = useState<Recommendation[]>([]);
+  const [showComparison, setShowComparison] = useState(false);
+  const { toast } = useToast();
 
   const handleRecommendationClick = (recommendation: Recommendation) => {
     setSelectedRecommendation(recommendation);
@@ -21,6 +27,21 @@ const Hero = () => {
   const handleSheetOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
       setSelectedRecommendation(null);
+    }
+  };
+
+  const handleCompareSelect = (recommendation: Recommendation, isSelected: boolean) => {
+    if (isSelected) {
+      if (comparisonList.length < 4) {
+        setComparisonList([...comparisonList, recommendation]);
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'You can only compare up to 4 plans.',
+        });
+      }
+    } else {
+      setComparisonList(comparisonList.filter((item) => item.policyName !== recommendation.policyName));
     }
   };
 
@@ -54,13 +75,23 @@ const Hero = () => {
 
         {recommendations && (
           <div id="recommendations" className="mt-20">
-            <h2 className="font-headline text-3xl font-bold text-center mb-8">Your Top 3 Recommendations</h2>
+            <div className="flex flex-col md:flex-row justify-center items-center text-center gap-4 mb-8">
+              <h2 className="font-headline text-3xl font-bold">Your Top 3 Recommendations</h2>
+              <Button 
+                onClick={() => setShowComparison(true)}
+                disabled={comparisonList.length < 2 || comparisonList.length > 4}
+              >
+                Compare Plans ({comparisonList.length})
+              </Button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {recommendations.recommendations.map((rec, index) => (
                 <RecommendationCard 
                   key={index} 
                   recommendation={rec} 
-                  onClick={() => handleRecommendationClick(rec)}
+                  onViewDetails={() => handleRecommendationClick(rec)}
+                  onCompareSelect={handleCompareSelect}
+                  isComparing={comparisonList.length >= 4 && !comparisonList.some(item => item.policyName === rec.policyName)}
                 />
               ))}
             </div>
@@ -71,6 +102,11 @@ const Hero = () => {
         recommendation={selectedRecommendation}
         isOpen={!!selectedRecommendation}
         onOpenChange={handleSheetOpenChange}
+      />
+      <ComparisonView 
+        isOpen={showComparison}
+        onOpenChange={setShowComparison}
+        recommendations={comparisonList}
       />
     </section>
   );
