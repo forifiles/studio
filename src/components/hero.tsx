@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import InsuranceForm from '@/components/insurance-form';
@@ -18,6 +18,7 @@ const Hero = () => {
   const [selectedRecommendation, setSelectedRecommendation] = useState<Recommendation | null>(null);
   const [comparisonList, setComparisonList] = useState<Recommendation[]>([]);
   const [showComparison, setShowComparison] = useState(false);
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
   const { toast } = useToast();
 
   const handleRecommendationClick = (recommendation: Recommendation) => {
@@ -44,6 +45,10 @@ const Hero = () => {
       setComparisonList(comparisonList.filter((item) => item.policyName !== recommendation.policyName));
     }
   };
+
+  const visibleRecommendations = showAllRecommendations 
+    ? recommendations?.recommendations 
+    : recommendations?.recommendations.slice(0, 3);
 
   return (
     <section id="hero" className="py-12 md:py-20 lg:py-24">
@@ -76,7 +81,7 @@ const Hero = () => {
         {recommendations && (
           <div id="recommendations" className="mt-20">
             <div className="flex flex-col md:flex-row justify-center items-center text-center gap-4 mb-8">
-              <h2 className="font-headline text-3xl font-bold">Your Top 3 Recommendations</h2>
+              <h2 className="font-headline text-3xl font-bold">Your Top Recommendations</h2>
               <Button 
                 onClick={() => setShowComparison(true)}
                 disabled={comparisonList.length < 2 || comparisonList.length > 4}
@@ -85,7 +90,7 @@ const Hero = () => {
               </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {recommendations.recommendations.map((rec, index) => (
+              {visibleRecommendations?.map((rec, index) => (
                 <RecommendationCard 
                   key={index} 
                   recommendation={rec} 
@@ -95,6 +100,11 @@ const Hero = () => {
                 />
               ))}
             </div>
+            {recommendations.recommendations.length > 3 && !showAllRecommendations && (
+              <div className="text-center mt-12">
+                <Button onClick={() => setShowAllRecommendations(true)}>View More</Button>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -29,7 +29,7 @@ const InsuranceRecommendationOutputSchema = z.object({
       covered: z.array(z.string()).describe('A list of items and scenarios that are covered by the policy.'),
       notCovered: z.array(z.string()).describe('A list of items and scenarios that are not covered by the policy.'),
     })
-  ).length(3).describe('The top three insurance recommendations.'),
+  ).min(3).max(5).describe('The top three to five insurance recommendations.'),
 });
 export type InsuranceRecommendationOutput = z.infer<typeof InsuranceRecommendationOutputSchema>;
 
@@ -45,7 +45,7 @@ const prompt = ai.definePrompt({
   output: {
     schema: InsuranceRecommendationOutputSchema
   },
-  prompt: `You are an expert insurance advisor specializing in the Nigerian market. Analyze the user data and insurance type to recommend the three best insurance options for the user in Nigeria.
+  prompt: `You are an expert insurance advisor specializing in the Nigerian market. Analyze the user data and insurance type to recommend the best insurance options for the user in Nigeria.
 
 User Data: {{{userData}}}
 Insurance Type: {{{insuranceType}}}
@@ -56,7 +56,7 @@ For each recommendation, provide:
 - A list of key items that are covered.
 - A list of key items that are NOT covered.
 
-Ensure the recommendations align with the user's needs in Nigeria. Only provide 3 top recommendations. Do not start with an introduction or greeting. Do not include a conclusion. Start immediately with the first recommendation and continue to the second and third.
+Ensure the recommendations align with the user's needs in Nigeria. Provide between 3 and 5 top recommendations. Do not start with an introduction or greeting. Do not include a conclusion. Start immediately with the first recommendation and continue to the subsequent recommendations.
 `,
 });
 
