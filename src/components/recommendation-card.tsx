@@ -4,9 +4,17 @@ import type { InsuranceRecommendationOutput } from '@/ai/flows/insurance-recomme
 
 type Recommendation = InsuranceRecommendationOutput['recommendations'][0];
 
-const RecommendationCard = ({ recommendation }: { recommendation: Recommendation }) => {
+type RecommendationCardProps = {
+  recommendation: Recommendation;
+  onClick: () => void;
+};
+
+const RecommendationCard = ({ recommendation, onClick }: RecommendationCardProps) => {
   return (
-    <Card className="flex flex-col h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-card/80 backdrop-blur-sm">
+    <Card 
+      className="flex flex-col h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-card/80 backdrop-blur-sm cursor-pointer"
+      onClick={onClick}
+    >
       <CardHeader>
         <CardTitle className="font-headline">{recommendation.policyName}</CardTitle>
         <CardDescription>{recommendation.insuranceProvider}</CardDescription>
@@ -23,7 +31,7 @@ const RecommendationCard = ({ recommendation }: { recommendation: Recommendation
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <div className="text-lg font-bold text-primary">{recommendation.premium}</div>
-        <Button>Select Plan</Button>
+        <Button>View Details</Button>
       </CardFooter>
     </Card>
   );

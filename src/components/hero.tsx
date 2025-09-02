@@ -5,10 +5,24 @@ import InsuranceForm from '@/components/insurance-form';
 import type { InsuranceRecommendationOutput } from '@/ai/flows/insurance-recommendation';
 import RecommendationCard from './recommendation-card';
 import { Loader2 } from 'lucide-react';
+import RecommendationDetails from './recommendation-details';
+
+type Recommendation = InsuranceRecommendationOutput['recommendations'][0];
 
 const Hero = () => {
   const [recommendations, setRecommendations] = useState<InsuranceRecommendationOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedRecommendation, setSelectedRecommendation] = useState<Recommendation | null>(null);
+
+  const handleRecommendationClick = (recommendation: Recommendation) => {
+    setSelectedRecommendation(recommendation);
+  };
+  
+  const handleSheetOpenChange = (isOpen: boolean) => {
+    if (!isOpen) {
+      setSelectedRecommendation(null);
+    }
+  };
 
   return (
     <section id="hero" className="py-12 md:py-20 lg:py-24">
@@ -43,12 +57,21 @@ const Hero = () => {
             <h2 className="font-headline text-3xl font-bold text-center mb-8">Your Top 3 Recommendations</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {recommendations.recommendations.map((rec, index) => (
-                <RecommendationCard key={index} recommendation={rec} />
+                <RecommendationCard 
+                  key={index} 
+                  recommendation={rec} 
+                  onClick={() => handleRecommendationClick(rec)}
+                />
               ))}
             </div>
           </div>
         )}
       </div>
+      <RecommendationDetails 
+        recommendation={selectedRecommendation}
+        isOpen={!!selectedRecommendation}
+        onOpenChange={handleSheetOpenChange}
+      />
     </section>
   );
 };

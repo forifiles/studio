@@ -26,6 +26,8 @@ const InsuranceRecommendationOutputSchema = z.object({
       coverageDetails: z.string().describe('A brief description of the coverage provided by the policy.'),
       premium: z.string().describe('The premium amount for the policy.'),
       reasoning: z.string().describe('The reasoning behind why this policy is a good fit for the user.'),
+      covered: z.array(z.string()).describe('A list of items and scenarios that are covered by the policy.'),
+      notCovered: z.array(z.string()).describe('A list of items and scenarios that are not covered by the policy.'),
     })
   ).length(3).describe('The top three insurance recommendations.'),
 });
@@ -48,7 +50,13 @@ const prompt = ai.definePrompt({
 User Data: {{{userData}}}
 Insurance Type: {{{insuranceType}}}
 
-Provide the recommendations in a clear and concise format, including the insurance provider, policy name, coverage details, premium, and reasoning for each recommendation. Ensure the recommendations align with the user's needs in Nigeria. Only provide 3 top recommendations. Do not start with an introduction or greeting. Do not include a conclusion. Start immediately with the first recommendation and continue to the second and third.
+For each recommendation, provide:
+- The insurance provider, policy name, a brief overview of coverage details, and the premium.
+- The reasoning for the recommendation.
+- A list of key items that are covered.
+- A list of key items that are NOT covered.
+
+Ensure the recommendations align with the user's needs in Nigeria. Only provide 3 top recommendations. Do not start with an introduction or greeting. Do not include a conclusion. Start immediately with the first recommendation and continue to the second and third.
 `,
 });
 
