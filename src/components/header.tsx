@@ -1,4 +1,5 @@
 import { ShieldCheck } from 'lucide-react';
+import LoginButton from './login-button';
 
 const Header = () => {
   return (
@@ -8,6 +9,7 @@ const Header = () => {
           <ShieldCheck className="w-8 h-8 text-primary" />
           <h1 className="text-2xl font-bold font-headline text-primary">Compare Africa</h1>
         </div>
+        <LoginButton />
       </div>
     </header>
   );
