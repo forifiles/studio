@@ -4,9 +4,10 @@ import { useAuth } from '@/hooks/use-auth';
 import { Button } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 import UserAvatar from './user-avatar';
+import Link from 'next/link';
 
 const LoginButton = () => {
-  const { user, login, loading } = useAuth();
+  const { user, loading } = useAuth();
 
   if (loading) {
     return <Skeleton className="h-10 w-24" />;
@@ -16,7 +17,7 @@ const LoginButton = () => {
     return <UserAvatar user={user} />;
   }
 
-  return <Button onClick={login}>Login</Button>;
+  return <Button asChild><Link href="/login">Login</Link></Button>;
 };
 
 export default LoginButton;
