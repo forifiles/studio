@@ -18,11 +18,16 @@ type UserAvatarProps = {
 };
 
 const UserAvatar = ({ user }: UserAvatarProps) => {
-  const { logout } = useAuth();
+  const { logout, userRole } = useAuth();
   const router = useRouter();
 
   const handleNavigate = (path: string) => {
     router.push(path);
+  }
+
+  const handleLogout = async () => {
+    await logout();
+    router.push('/login');
   }
 
   return (
@@ -38,9 +43,11 @@ const UserAvatar = ({ user }: UserAvatarProps) => {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => handleNavigate('/admin')}>Admin Dashboard</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleNavigate(userRole === 'admin' ? '/admin' : '/dashboard')}>
+          Dashboard
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

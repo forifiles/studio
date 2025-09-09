@@ -12,9 +12,11 @@ import PurchaseList from '@/components/admin/purchase-list';
 import PlanManager from '@/components/admin/plan-manager';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { ShieldAlert } from 'lucide-react';
 
 export default function AdminPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, userRole } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
   const [purchases, setPurchases] = useState<Purchase[]>([]);
@@ -41,21 +43,39 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/login');
+    if (!loading) {
+      if (!user) {
+        router.push('/login');
+      } else if (userRole && userRole !== 'admin') {
+        router.push('/dashboard');
+      }
     }
-  }, [user, loading, router]);
+  }, [user, userRole, loading, router]);
   
   useEffect(() => {
-    if(user) {
+    if(userRole === 'admin') {
       loadAdminData();
     }
-  }, [user]);
+  }, [userRole]);
 
-  if (loading || !user) {
+  if (loading || !user || !userRole) {
     return (
       <div className="flex h-screen items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (userRole !== 'admin') {
+    return (
+      <div className="flex h-screen items-center justify-center p-4">
+        <Alert variant="destructive" className="max-w-lg">
+          <ShieldAlert className="h-4 w-4" />
+          <AlertTitle>Access Denied</AlertTitle>
+          <AlertDescription>
+            You do not have permission to view this page. You will be redirected.
+          </AlertDescription>
+        </Alert>
       </div>
     );
   }

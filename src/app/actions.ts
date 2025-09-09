@@ -2,8 +2,8 @@
 
 import { insuranceRecommendation, type InsuranceRecommendationInput, type InsuranceRecommendationOutput } from '@/ai/flows/insurance-recommendation';
 import { db } from '@/lib/firebase';
-import type { InsurancePlan, Purchase, PurchaseStatus } from '@/lib/types';
-import { collection, addDoc, serverTimestamp, getDocs, doc, updateDoc, query, orderBy } from 'firebase/firestore';
+import type { InsurancePlan, Purchase, PurchaseStatus, UserRole } from '@/lib/types';
+import { collection, addDoc, serverTimestamp, getDocs, doc, updateDoc, query, orderBy, where, getDoc } from 'firebase/firestore';
 
 export async function getInsuranceRecommendations(input: InsuranceRecommendationInput): Promise<InsuranceRecommendationOutput> {
   try {
@@ -73,5 +73,51 @@ export async function updatePurchaseStatus(purchaseId: string, status: PurchaseS
   } catch (error) {
     console.error('Error updating purchase status:', error);
     throw new Error('Failed to update purchase status.');
+  }
+}
+
+// --- User Actions ---
+
+export async function getUserPurchases(userId: string): Promise<Purchase[]> {
+  try {
+    const purchasesCol = collection(db, 'purchases');
+    const q = query(purchasesCol, where('userId', '==', userId), orderBy('purchaseDate', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Purchase));
+  } catch (error) {
+    console.error('Error fetching user purchases:', error);
+    throw new Error('Failed to fetch user purchase records.');
+  }
+}
+
+export async function getUserRole(userId: string): Promise<UserRole> {
+  try {
+    const userDocRef = doc(db, 'users', userId);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      return (userDoc.data()?.role as UserRole) || 'user';
+    }
+    return 'user';
+  } catch (error) {
+    console.error('Error fetching user role:', error);
+    // Default to 'user' role in case of error
+    return 'user';
+  }
+}
+
+export async function createUserInFirestore(userId: string, email: string) {
+  try {
+    const userDocRef = doc(db, 'users', userId);
+    const userDoc = await getDoc(userDocRef);
+    if (!userDoc.exists()) {
+      await addDoc(collection(db, 'users'), {
+        uid: userId,
+        email: email,
+        role: 'user',
+        createdAt: serverTimestamp(),
+      });
+    }
+  } catch (error) {
+    console.error('Error creating user in Firestore:', error);
   }
 }

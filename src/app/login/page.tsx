@@ -11,10 +11,12 @@ import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { loginSchema, type LoginForm } from '@/lib/types';
+import { useToast } from '@/hooks/use-toast';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { login, userRole } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<LoginForm>({
@@ -28,8 +30,16 @@ export default function LoginPage() {
   async function onSubmit(values: LoginForm) {
     setIsLoading(true);
     try {
-      await login(values);
-      router.push('/');
+      const loggedInUserRole = await login(values);
+       toast({
+        title: 'Login Successful',
+        description: 'Welcome back!',
+      });
+      if (loggedInUserRole === 'admin') {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
     } catch (error) {
       // Error is handled by toast in auth provider
     } finally {

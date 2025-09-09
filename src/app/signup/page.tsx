@@ -11,10 +11,12 @@ import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { signUpSchema, type SignUpForm } from '@/lib/types';
+import { useToast } from '@/hooks/use-toast';
 
 export default function SignUpPage() {
   const { signup } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<SignUpForm>({
@@ -30,7 +32,11 @@ export default function SignUpPage() {
     setIsLoading(true);
     try {
       await signup(values);
-      router.push('/');
+      toast({
+        title: 'Account Created!',
+        description: 'You have been successfully signed up.',
+      });
+      router.push('/dashboard');
     } catch (error) {
       // Error is handled by toast in auth provider
     } finally {

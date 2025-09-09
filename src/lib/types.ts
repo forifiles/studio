@@ -55,3 +55,12 @@ export type InsurancePlan = {
   coverage: string[];
   exclusions: string[];
 }
+
+export type UserRole = 'admin' | 'user';
+
+export type UserProfile = {
+  uid: string;
+  email: string;
+  role: UserRole;
+  createdAt: Timestamp;
+};
