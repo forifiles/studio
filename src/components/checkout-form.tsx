@@ -12,6 +12,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
+import { createPurchaseRecord } from '@/app/actions';
+import { storage } from '@/lib/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { Timestamp } from 'firebase/firestore';
 
 const checkoutSchema = z.object({
   fullName: z.string().min(3, 'Full name is required'),
@@ -21,7 +25,7 @@ const checkoutSchema = z.object({
   idType: z.enum(['nin', 'passport', 'drivers_license', 'voters_card']),
   idNumber: z.string().min(5, 'A valid ID number is required'),
   idExpiry: z.date().optional(),
-  idImage: z.any().refine((file) => file?.length == 1, 'ID Image is required.'),
+  idImage: z.any().refine((files) => files?.length == 1, 'ID Image is required.'),
 });
 
 type CheckoutFormProps = {
@@ -49,55 +53,80 @@ const CheckoutForm = ({ isOpen, onOpenChange, policyName, premium }: CheckoutFor
   
   const idType = form.watch('idType');
 
-  // This function will be called by the Paystack callback
-  const handleSuccessfulPayment = (reference: string) => {
-    setIsLoading(false);
-    onOpenChange(false);
-    form.reset();
-    toast({
-      title: 'Purchase Complete!',
-      description: `Your application for ${policyName} has been submitted. Payment reference: ${reference}`,
-    });
+  const handleSuccessfulPayment = async (reference: string, values: z.infer<typeof checkoutSchema>, idImageUrl: string) => {
+    if (!user) return;
+    
+    try {
+      await createPurchaseRecord({
+        userId: user.uid,
+        userEmail: user.email!,
+        policyName,
+        premium,
+        paymentReference: reference,
+        formData: {
+          fullName: values.fullName,
+          address: values.address,
+          city: values.city,
+          state: values.state,
+          idType: values.idType,
+          idNumber: values.idNumber,
+          idExpiry: values.idExpiry ? Timestamp.fromDate(values.idExpiry) : undefined,
+          idImageUrl,
+        },
+      });
+      toast({
+        title: 'Purchase Complete!',
+        description: `Your application for ${policyName} has been submitted. Payment reference: ${reference}`,
+      });
+    } catch (error) {
+       toast({
+        variant: 'destructive',
+        title: 'Database Error',
+        description: 'Failed to save your purchase details. Please contact support.',
+      });
+    } finally {
+      setIsLoading(false);
+      onOpenChange(false);
+      form.reset();
+    }
   }
 
-  // This function simulates initiating a payment with Paystack
-  const initiatePayment = (values: z.infer<typeof checkoutSchema>) => {
-    
-    // --- How to implement Paystack ---
-    // 1.  On your backend, create an endpoint that calls the Paystack Transaction Initialization API.
-    //     This API call will include the user's email, the amount (premium), and other details.
-    //     It will return an `authorization_url`.
-    //     API Docs: https://paystack.com/docs/api/transaction/#initialize
-    
-    // 2.  In this function, make a request to your backend endpoint to get the `authorization_url`.
-    
-    // 3.  Redirect the user to the `authorization_url` or use Paystack Inline.
-    //     - For redirection: window.location.href = authorization_url;
-    //     - For Paystack Inline, you would use the access_code from the response.
-
-    // 4.  Set up a webhook on your Paystack dashboard to receive payment success events (`charge.success`).
-    //     When your webhook URL receives this event, you can verify the transaction and provision the service (e.g., mark the policy as active in your database).
-
-    // --- FAKE IMPLEMENTATION FOR NOW ---
-    console.log('Checkout values:', values);
+  const initiatePayment = async (values: z.infer<typeof checkoutSchema>) => {
     setIsLoading(true);
-    
-    // Simulate API call to your backend to get a payment link
-    setTimeout(() => {
-      const fakeAuthUrl = `https://checkout.paystack.com/pkh_${Math.random().toString(36).substring(7)}`;
-      const paymentWindow = window.open(fakeAuthUrl, '_blank', 'width=800,height=600');
-      
-      // Simulate checking if the payment window is closed
-      const checkWindow = setInterval(() => {
-        if (paymentWindow && paymentWindow.closed) {
-          clearInterval(checkWindow);
-          // In a real scenario, Paystack calls a callback URL or webhook.
-          // We are simulating the callback here.
-          handleSuccessfulPayment(`fake_ref_${new Date().getTime()}`);
-        }
-      }, 500);
 
-    }, 2000);
+    try {
+       // --- UPLOAD ID IMAGE TO FIREBASE STORAGE ---
+      const imageFile = values.idImage[0];
+      const storageRef = ref(storage, `id_documents/${user!.uid}/${Date.now()}_${imageFile.name}`);
+      const uploadResult = await uploadBytes(storageRef, imageFile);
+      const idImageUrl = await getDownloadURL(uploadResult.ref);
+
+      // --- FAKE PAYSTACK IMPLEMENTATION ---
+      console.log('Checkout values:', values);
+      console.log('ID Image URL:', idImageUrl);
+      
+      // Simulate API call to your backend to get a payment link
+      setTimeout(() => {
+        const fakeAuthUrl = `https://checkout.paystack.com/pkh_${Math.random().toString(36).substring(7)}`;
+        const paymentWindow = window.open(fakeAuthUrl, '_blank', 'width=800,height=600');
+        
+        const checkWindow = setInterval(() => {
+          if (paymentWindow && paymentWindow.closed) {
+            clearInterval(checkWindow);
+            handleSuccessfulPayment(`fake_ref_${new Date().getTime()}`, values, idImageUrl);
+          }
+        }, 500);
+
+      }, 2000);
+    } catch (error) {
+      console.error("Payment initiation or file upload error:", error);
+      toast({
+        variant: 'destructive',
+        title: 'Upload Failed',
+        description: 'Could not upload your ID image. Please try again.',
+      });
+      setIsLoading(false);
+    }
   }
 
   async function onSubmit(values: z.infer<typeof checkoutSchema>) {
@@ -109,7 +138,7 @@ const CheckoutForm = ({ isOpen, onOpenChange, policyName, premium }: CheckoutFor
       });
       return;
     }
-    initiatePayment(values);
+    await initiatePayment(values);
   }
 
   return (
@@ -228,7 +257,7 @@ const CheckoutForm = ({ isOpen, onOpenChange, policyName, premium }: CheckoutFor
                     <FormItem>
                       <FormLabel>Expiry Date</FormLabel>
                       <FormControl>
-                        <Input type="date" {...field} onChange={e => field.onChange(e.target.valueAsDate)} />
+                        <Input type="date" {...field} value={field.value ? field.value.toISOString().split('T')[0] : ''} onChange={e => field.onChange(e.target.valueAsDate)} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -238,7 +267,7 @@ const CheckoutForm = ({ isOpen, onOpenChange, policyName, premium }: CheckoutFor
               <FormField
                 control={form.control}
                 name="idImage"
-                render={({ field: { onChange, ...field } }) => (
+                render={({ field: { onChange, value, ...field } }) => (
                   <FormItem>
                     <FormLabel>Upload ID Image</FormLabel>
                     <FormControl>

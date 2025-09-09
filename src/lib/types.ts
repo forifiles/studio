@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Timestamp } from 'firebase/firestore';
 
 export const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address.'),
@@ -19,3 +20,38 @@ export const signUpSchema = z
   });
 
 export type SignUpForm = z.infer<typeof signUpSchema>;
+
+
+// Database Types
+export type PurchaseStatus = 'pending' | 'active' | 'expired' | 'cancelled';
+
+export type Purchase = {
+  id?: string;
+  userId: string;
+  userEmail: string;
+  policyName: string;
+  premium: string;
+  purchaseDate: Timestamp;
+  status: PurchaseStatus;
+  formData: {
+    fullName: string;
+    address: string;
+    city: string;
+    state: string;
+    idType: string;
+    idNumber: string;
+    idExpiry?: Timestamp;
+    idImageUrl: string;
+  };
+  paymentReference: string;
+}
+
+export type InsurancePlan = {
+  id?: string;
+  name: string;
+  provider: string;
+  description: string;
+  premium: number;
+  coverage: string[];
+  exclusions: string[];
+}
