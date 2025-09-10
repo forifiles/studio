@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/use-auth';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { loginSchema, type LoginForm } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 export default function LoginPage() {
   const { login, userRole } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,6 +36,13 @@ export default function LoginPage() {
         title: 'Login Successful',
         description: 'Welcome back!',
       });
+
+      const redirect = searchParams.get('redirect');
+      if (redirect) {
+        router.push(redirect);
+        return;
+      }
+
       if (loggedInUserRole === 'admin') {
         router.push('/admin');
       } else {

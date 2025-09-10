@@ -11,7 +11,7 @@ import {
 import { Button } from './ui/button';
 import type { InsuranceRecommendationOutput } from '@/ai/flows/insurance-recommendation';
 import { CheckCircle2, XCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CheckoutForm from './checkout-form';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
@@ -29,19 +29,33 @@ const RecommendationDetails = ({ recommendation, isOpen, onOpenChange }: Recomme
   const { user } = useAuth();
   const router = useRouter();
 
+  useEffect(() => {
+    if (isOpen && user) {
+        setShowCheckout(true);
+    }
+  }, [isOpen, user]);
+
   if (!recommendation) return null;
 
   const handleSelectPlan = () => {
     if (user) {
       setShowCheckout(true);
     } else {
-      router.push('/login');
+      sessionStorage.setItem('pendingCheckout', JSON.stringify(recommendation));
+      router.push('/login?redirect=/');
     }
   };
 
+  const handleCloseSheet = (open: boolean) => {
+    if (!open) {
+      setShowCheckout(false); // Also close checkout form
+    }
+    onOpenChange(open);
+  }
+
   return (
     <>
-      <Sheet open={isOpen} onOpenChange={onOpenChange}>
+      <Sheet open={isOpen && !showCheckout} onOpenChange={handleCloseSheet}>
         <SheetContent className="sm:max-w-lg w-full">
           <SheetHeader className="text-left">
             <SheetTitle className="font-headline text-2xl">{recommendation.policyName}</SheetTitle>
@@ -79,7 +93,13 @@ const RecommendationDetails = ({ recommendation, isOpen, onOpenChange }: Recomme
       </Sheet>
       <CheckoutForm 
         isOpen={showCheckout} 
-        onOpenChange={setShowCheckout} 
+        onOpenChange={(open) => {
+            setShowCheckout(open);
+            // If checkout is closed, also close the details sheet
+            if (!open) {
+              onOpenChange(false);
+            }
+        }} 
         policyName={recommendation.policyName}
         premium={recommendation.premium}
       />
