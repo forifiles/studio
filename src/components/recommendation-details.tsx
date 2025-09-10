@@ -11,8 +11,10 @@ import {
 import { Button } from './ui/button';
 import type { InsuranceRecommendationOutput } from '@/ai/flows/insurance-recommendation';
 import { CheckCircle2, XCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CheckoutForm from './checkout-form';
+import { useAuth } from '@/hooks/use-auth';
+import { useRouter } from 'next/navigation';
 
 type Recommendation = InsuranceRecommendationOutput['recommendations'][0];
 
@@ -24,12 +26,36 @@ type RecommendationDetailsProps = {
 
 const RecommendationDetails = ({ recommendation, isOpen, onOpenChange }: RecommendationDetailsProps) => {
   const [showCheckout, setShowCheckout] = useState(false);
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isOpen && user) {
+        setShowCheckout(true);
+    }
+  }, [isOpen, user]);
 
   if (!recommendation) return null;
 
+  const handleSelectPlan = () => {
+    if (user) {
+      setShowCheckout(true);
+    } else {
+      sessionStorage.setItem('pendingCheckout', JSON.stringify(recommendation));
+      router.push('/login?redirect=/');
+    }
+  };
+
+  const handleCloseSheet = (open: boolean) => {
+    if (!open) {
+      setShowCheckout(false); // Also close checkout form
+    }
+    onOpenChange(open);
+  }
+
   return (
     <>
-      <Sheet open={isOpen} onOpenChange={onOpenChange}>
+      <Sheet open={isOpen && !showCheckout} onOpenChange={handleCloseSheet}>
         <SheetContent className="sm:max-w-lg w-full">
           <SheetHeader className="text-left">
             <SheetTitle className="font-headline text-2xl">{recommendation.policyName}</SheetTitle>
@@ -61,13 +87,19 @@ const RecommendationDetails = ({ recommendation, isOpen, onOpenChange }: Recomme
           </div>
           <SheetFooter className="mt-8 flex-col sm:flex-row sm:justify-between items-center gap-4">
               <div className="text-xl font-bold text-primary">{recommendation.premium}</div>
-              <Button size="lg" onClick={() => setShowCheckout(true)}>Select this Plan</Button>
+              <Button size="lg" onClick={handleSelectPlan}>Select this Plan</Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>
       <CheckoutForm 
         isOpen={showCheckout} 
-        onOpenChange={setShowCheckout} 
+        onOpenChange={(open) => {
+            setShowCheckout(open);
+            // If checkout is closed, also close the details sheet
+            if (!open) {
+              onOpenChange(false);
+            }
+        }} 
         policyName={recommendation.policyName}
         premium={recommendation.premium}
       />

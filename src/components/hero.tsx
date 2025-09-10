@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InsuranceForm from '@/components/insurance-form';
 import type { InsuranceRecommendationOutput } from '@/ai/flows/insurance-recommendation';
 import RecommendationCard from './recommendation-card';
@@ -20,6 +20,20 @@ const Hero = () => {
   const [showComparison, setShowComparison] = useState(false);
   const [showAllRecommendations, setShowAllRecommendations] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const pendingCheckout = sessionStorage.getItem('pendingCheckout');
+    if (pendingCheckout) {
+      try {
+        const recommendation: Recommendation = JSON.parse(pendingCheckout);
+        setSelectedRecommendation(recommendation);
+        sessionStorage.removeItem('pendingCheckout');
+      } catch (error) {
+        console.error('Failed to parse pending checkout data', error);
+        sessionStorage.removeItem('pendingCheckout');
+      }
+    }
+  }, []);
 
   const handleRecommendationClick = (recommendation: Recommendation) => {
     setSelectedRecommendation(recommendation);
