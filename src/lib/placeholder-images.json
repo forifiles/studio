@@ -29,17 +29,17 @@
   ],
   "motor": {
     "hero": {
-      "src": "https://picsum.photos/seed/new-motor-hero/400/300",
+      "src": "https://picsum.photos/seed/car-safety-hero/400/300",
       "alt": "Illustration of a car protected by an umbrella and a checklist",
       "data-ai-hint": "car protection"
     },
     "theft": {
-      "src": "https://picsum.photos/seed/new-motor-theft/400/300",
+      "src": "https://picsum.photos/seed/car-alert/400/300",
       "alt": "Illustration of a person trying to break into a car",
       "data-ai-hint": "car security"
     },
     "policy": {
-      "src": "https://picsum.photos/seed/new-motor-policy/400/300",
+      "src": "https://picsum.photos/seed/insurance-doc/400/300",
       "alt": "Illustration of a person reviewing an insurance policy document with a magnifying glass.",
       "data-ai-hint": "document review"
     }
