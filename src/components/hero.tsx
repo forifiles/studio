@@ -67,12 +67,18 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative overflow-hidden py-12 md:py-20 lg:py-24 bg-gradient-to-br from-primary/10 via-background to-background">
+      <div className="absolute -top-20 -left-20 opacity-10">
+        <JumpingRobot />
+      </div>
+       <div className="absolute -top-10 -right-20 opacity-5 scale-75">
+        <JumpingRobot />
+      </div>
+      <div className="absolute bottom-0 right-10 opacity-10 scale-50">
+        <JumpingRobot />
+      </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left relative">
-             <div className="absolute -top-20 -left-20 opacity-10">
-                <JumpingRobot />
-            </div>
             <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
               The smart new way to buy insurance.
             </h1>
