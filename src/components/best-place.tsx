@@ -172,6 +172,40 @@ const features = [
     title: 'Guaranteed best',
     description: 'value for your money',
   },
+  {
+    icon: (
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M65 35C73.2843 35 80 41.7157 80 50C80 58.2843 73.2843 65 65 65" stroke="#F59E0B" stroke-width="2"/>
+            <path d="M60 40C68.2843 40 75 46.7157 75 55C75 63.2843 68.2843 70 60 70" stroke="#4A5568" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M50 75C58.2843 75 65 68.2843 65 60C65 51.7157 58.2843 45 50 45C41.7157 45 35 51.7157 35 60C35 68.2843 41.7157 75 50 75Z" fill="#F59E0B" fill-opacity="0.2"/>
+            <path d="M50 75C58.2843 75 65 68.2843 65 60C65 51.7157 58.2843 45 50 45C41.7157 45 35 51.7157 35 60C35 68.2843 41.7157 75 50 75Z" stroke="#4A5568" stroke-width="2"/>
+            <path d="M50 45V35" stroke="#4A5568" stroke-width="2" stroke-linecap="round"/>
+            <path d="M50 30L55 35L45 35L50 30Z" fill="#4A5568"/>
+            <path d="M50 62C52.2091 62 54 60.2091 54 58C54 55.7909 52.2091 54 50 54C47.7909 54 46 55.7909 46 58C46 60.2091 47.7909 62 50 62Z" fill="#4A5568"/>
+            <path d="M40 70C40 67.2386 44.4772 65 50 65C55.5228 65 60 67.2386 60 70" stroke="#4A5568" stroke-width="2"/>
+        </svg>
+    ),
+    title: 'Support assistants ready',
+    description: 'to help',
+  },
+  {
+    icon: (
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="30" width="40" height="50" rx="2" fill="#F59E0B" fill-opacity="0.2" stroke="#F59E0B" stroke-width="2"/>
+            <path d="M35 40H65" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+            <path d="M35 50H55" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+            <path d="M35 60H60" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+            <rect x="40" y="25" width="40" height="50" rx="2" fill="#FEF3C7" stroke="#4A5568" stroke-width="2"/>
+            <path d="M45 35H75" stroke="#4A5568" stroke-width="2" stroke-linecap="round"/>
+            <path d="M45 45H65" stroke="#4A5568" stroke-width="2" stroke-linecap="round"/>
+            <path d="M45 55H70" stroke="#4A5568" stroke-width="2" stroke-linecap="round"/>
+            <path d="M75 65L85 60V70L75 65Z" fill="#4A5568"/>
+            <path d="M25 65L15 70V60L25 65Z" fill="#4A5568"/>
+        </svg>
+    ),
+    title: 'Side by side comparisons',
+    description: 'from top insurers',
+  },
 ];
 
 const BestPlace = () => {
@@ -179,9 +213,8 @@ const BestPlace = () => {
     <section id="best-place" className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-10 font-headline">
-          What makes{' '}
-          <span className="text-primary">Compare Africa</span> the best place
-          to buy insurance?
+          What makes <span className="text-primary">Compare Africa</span> the
+          best place to buy insurance?
         </h2>
         <Carousel
           opts={{
