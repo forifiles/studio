@@ -66,7 +66,7 @@ const Hero = () => {
     : recommendations?.recommendations.slice(0, 3);
 
   return (
-    <section id="hero" className="relative overflow-hidden py-12 md:py-20 lg:py-24 bg-gradient-to-br from-primary/10 via-background to-background">
+    <section id="hero" className="relative overflow-hidden py-12 md:py-20 lg:py-24 bg-gradient-to-br from-blue-100 via-background to-background shadow-inner-lg" style={{boxShadow: 'inset 0 0 10px 2px rgba(0,0,0,0.05)'}}>
       <div className="absolute -top-20 -left-20 opacity-10">
         <JumpingRobot />
       </div>
