@@ -1,4 +1,4 @@
-import { ShieldCheck, Mail, Phone, MessageSquare, Instagram, Linkedin, Youtube, Twitter, Facebook } from "lucide-react";
+import { ShieldCheck, Mail, Phone, MessageCircle, Instagram, Linkedin, Youtube, Twitter, Facebook } from "lucide-react";
 import Link from "next/link";
 
 const footerLinks = {
@@ -51,7 +51,7 @@ const Footer = () => {
                     <span>support@chebe.ng</span>
                 </a>
                  <a href="https://wa.me/2348044851869" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-3 border border-primary-foreground/50 rounded-lg hover:bg-primary-foreground/10">
-                    <MessageSquare className="w-5 h-5"/>
+                    <MessageCircle className="w-5 h-5"/>
                     <span>+234 804 485 1869</span>
                 </a>
                  <a href="tel:+2348044851869" className="flex items-center gap-4 p-3 border border-primary-foreground/50 rounded-lg hover:bg-primary-foreground/10">
