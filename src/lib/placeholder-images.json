@@ -26,5 +26,17 @@
       "alt": "An architectural landmark in Abuja",
       "data-ai-hint": "Abuja landmark"
     }
-  ]
+  ],
+  "motor": {
+    "hero": {
+      "src": "https://picsum.photos/seed/motor-hero-1/400/300",
+      "alt": "Illustration of a car protected by an umbrella and a checklist",
+      "data-ai-hint": "car insurance"
+    },
+    "theft": {
+      "src": "https://picsum.photos/seed/motor-theft-1/400/300",
+      "alt": "Illustration of a person trying to break into a car",
+      "data-ai-hint": "car theft"
+    }
+  }
 }
