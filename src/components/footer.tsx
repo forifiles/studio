@@ -46,9 +46,9 @@ const Footer = () => {
               ))}
             </div>
             <div className="space-y-4 max-w-sm">
-                <a href="mailto:support@chebe.ng" className="flex items-center gap-4 p-3 border border-primary-foreground/50 rounded-lg hover:bg-primary-foreground/10">
+                <a href="mailto:support@compareafrica.ng" className="flex items-center gap-4 p-3 border border-primary-foreground/50 rounded-lg hover:bg-primary-foreground/10">
                     <Mail className="w-5 h-5"/>
-                    <span>support@chebe.ng</span>
+                    <span>support@compareafrica.ng</span>
                 </a>
                  <a href="https://wa.me/2348044851869" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-3 border border-primary-foreground/50 rounded-lg hover:bg-primary-foreground/10">
                     <MessageCircle className="w-5 h-5"/>
