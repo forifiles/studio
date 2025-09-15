@@ -66,7 +66,7 @@ const Hero = () => {
     : recommendations?.recommendations.slice(0, 3);
 
   return (
-    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-gradient-to-br from-background to-blue-900/30 shadow-inner-lg">
+    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-primary/10 shadow-inner-lg">
        <JumpingRobot className="absolute top-10 left-10" />
        <JumpingRobot className="absolute top-20 right-20" animationDelay="0.5s" />
        <JumpingRobot className="absolute bottom-10 right-1/4" animationDelay="1s" />
@@ -126,10 +126,9 @@ const Hero = () => {
           </div>
         )}
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-[100px] text-white overflow-hidden">
-          <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="h-full w-full">
-            <path d="M0,120 L1440,0 V120 H0 Z" className="fill-blue-900/30" />
-            <path d="M0,120 L1440,30 V120 H0 Z" className="fill-blue-900/20" />
+      <div className="absolute bottom-0 left-0 w-full h-[100px] text-background overflow-hidden">
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="h-full w-full fill-current">
+            <path d="M0,53.4C14.8,39.5,43.2,12.2,74.5,9.5C133.5,4.3,165,24.8,202.8,53.4C240.5,82,293.2,111.5,357.5,113.8C421.8,116.2,467.5,91.8,528.5,68.2C589.5,44.5,660.5,22.8,721.5,25.8C782.5,28.8,828.5,55.2,881.5,81.5C934.5,107.8,997.2,123.2,1059.5,113.8C1121.8,104.5,1174.5,70.2,1229.5,48.2C1284.5,26.2,1348,16.2,1404,22.8C1430.3,25.8,1440,31.5,1440,34.8L1440,120L0,120L0,53.4Z" />
           </svg>
       </div>
       <RecommendationDetails 
