@@ -39,7 +39,7 @@ const features = [
 
 const BestPlace = () => {
   return (
-    <section id="best-place" className="py-12 md:py-20 bg-white text-black">
+    <section id="best-place" className="py-12 md:py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-10 font-headline">
           What makes <span className="text-primary">Compare Africa</span> the
@@ -61,9 +61,9 @@ const BestPlace = () => {
                 <div className="p-1">
                   <Card className="border-none shadow-none bg-transparent">
                     <CardContent className="flex flex-col items-center justify-center p-6 text-center gap-4">
-                      <div className="w-32 h-32 flex items-center justify-center bg-gray-100 rounded-full relative">
+                      <div className="w-32 h-32 flex items-center justify-center bg-background/50 rounded-full relative">
                         <div
-                          className="absolute inset-0 bg-gray-200 rounded-full transform scale-90"
+                          className="absolute inset-0 bg-background/20 rounded-full transform scale-90"
                           style={{
                             clipPath:
                               'ellipse(50% 40% at 50% 50%)',
