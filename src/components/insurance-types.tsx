@@ -12,11 +12,11 @@ const insuranceTypes = [
 
 const InsuranceTypes = () => {
   return (
-    <section id="insurance-types" className="py-12 md:py-20 -mt-20 relative z-20">
+    <section id="insurance-types" className="py-12 md:py-20 relative z-20">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {insuranceTypes.map((type) => (
           <Link href={type.href} key={type.name} className="block">
-            <Card className="text-center p-6 transition-all duration-300 hover:bg-primary/10 hover:-translate-y-2 cursor-pointer border-2 h-full bg-card shadow-lg">
+            <Card className="text-center p-6 transition-all duration-300 hover:bg-primary/10 hover:-translate-y-2 cursor-pointer border-2 h-full bg-card shadow-lg text-foreground">
               <CardContent className="flex flex-col items-center justify-center gap-4 p-0">
                 <type.icon className="w-12 h-12 text-primary" />
                 <h3 className="font-semibold font-headline">{type.name}</h3>

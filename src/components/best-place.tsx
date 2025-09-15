@@ -39,7 +39,7 @@ const features = [
 
 const BestPlace = () => {
   return (
-    <section id="best-place" className="py-12 md:py-20 bg-background">
+    <section id="best-place" className="py-12 md:py-20 bg-white text-black">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-10 font-headline">
           What makes <span className="text-primary">Compare Africa</span> the

@@ -9,7 +9,6 @@ import RecommendationDetails from './recommendation-details';
 import { Button } from './ui/button';
 import ComparisonView from './comparison-view';
 import { useToast } from '@/hooks/use-toast';
-import JumpingRobot from './jumping-robot';
 
 type Recommendation = InsuranceRecommendationOutput['recommendations'][0];
 
@@ -66,17 +65,8 @@ const Hero = () => {
     : recommendations?.recommendations.slice(0, 3);
 
   return (
-    <section id="hero" className="relative overflow-hidden py-12 md:py-20 lg:py-24 bg-gradient-to-br from-blue-100 via-background to-background shadow-inner-lg" style={{boxShadow: 'inset 0 0 10px 2px rgba(0,0,0,0.05)'}}>
-      <div className="absolute -top-20 -left-20 opacity-10">
-        <JumpingRobot />
-      </div>
-       <div className="absolute -top-10 -right-20 opacity-5 scale-75">
-        <JumpingRobot />
-      </div>
-      <div className="absolute bottom-0 right-10 opacity-10 scale-50">
-        <JumpingRobot />
-      </div>
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-background">
+      <div className="container mx-auto px-4 pt-12 md:pt-20 lg:pt-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left relative">
             <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
@@ -131,6 +121,12 @@ const Hero = () => {
             )}
           </div>
         )}
+      </div>
+      <div className="absolute bottom-0 left-0 w-full text-white">
+          <svg viewBox="0 -20 700 110" width="100%" height="110" preserveAspectRatio="none">
+            <path transform="translate(0, -20)" d="M0,10 c80,-22 240,0 350,18 c90,17 260,7.5 350,-20 v50 h-700" fill="#ffffff" />
+            <path d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z" fill="#1e1b4b" />
+        </svg>
       </div>
       <RecommendationDetails 
         recommendation={selectedRecommendation}
