@@ -1,6 +1,7 @@
 import Header from '@/components/header';
 import Hero from '@/components/hero';
 import InsuranceTypes from '@/components/insurance-types';
+import HowItWorks from '@/components/how-it-works';
 import Faq from '@/components/faq';
 import Footer from '@/components/footer';
 
@@ -11,6 +12,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <InsuranceTypes />
+        <HowItWorks />
         <Faq />
       </main>
       <Footer />
