@@ -21,7 +21,7 @@ const footerLinks = {
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/compareafrica/", 'aria-label': 'Instagram' },
-  { icon: Linkedin, href: "#", 'aria-label': 'LinkedIn' },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/compare-africa/", 'aria-label': 'LinkedIn' },
   { icon: Youtube, href: "#", 'aria-label': 'YouTube' },
   { icon: Twitter, href: "#", 'aria-label': 'Twitter' },
   { icon: Facebook, href: "#", 'aria-label': 'Facebook' },
