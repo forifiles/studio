@@ -54,10 +54,10 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
     setIsLoading(true);
     setRecommendations(null);
 
-    let userData = `Age: ${values.age}, Annual Income: ${values.income}, Family Status: ${values.familyStatus}, Coverage Needs: ${values.coverageNeeds}, Email: ${values.email}, Phone: ${values.phone}`;
+    let userData = `Age: ${values.age}, Annual Income (NGN): ${values.income}, Family Status: ${values.familyStatus}, Coverage Needs: "${values.coverageNeeds}", Email: ${values.email}, Phone: ${values.phone}`;
 
     if (values.insuranceType === 'motor') {
-      userData += `, Car Type: ${values.carType}, Car Value: ${values.carValue}`;
+      userData += `, Car Type: "${values.carType}", Car Value (NGN): ${values.carValue}`;
     }
     
     try {
@@ -247,5 +247,3 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
 };
 
 export default InsuranceForm;
-
-    

@@ -24,7 +24,7 @@ const InsuranceRecommendationOutputSchema = z.object({
       insuranceProvider: z.string().describe('The name of the insurance provider.'),
       policyName: z.string().describe('The name of the insurance policy.'),
       coverageDetails: z.string().describe('A brief description of the coverage provided by the policy.'),
-      premium: z.string().describe('The premium amount for the policy.'),
+      premium: z.string().describe('The premium amount for the policy as a formatted string (e.g., "₦50,000 / year").'),
       reasoning: z.string().describe('The reasoning behind why this policy is a good fit for the user.'),
       covered: z.array(z.string()).describe('A list of items and scenarios that are covered by the policy.'),
       notCovered: z.array(z.string()).describe('A list of items and scenarios that are not covered by the policy.'),
@@ -51,7 +51,8 @@ User Data: {{{userData}}}
 Insurance Type: {{{insuranceType}}}
 
 For each recommendation, provide:
-- The insurance provider, policy name, a brief overview of coverage details, and the premium.
+- The insurance provider, policy name, a brief overview of coverage details.
+- The premium, as a string formatted for currency in Naira (e.g., "₦50,000 / year").
 - The reasoning for the recommendation.
 - A list of key items that are covered.
 - A list of key items that are NOT covered.
