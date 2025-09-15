@@ -9,6 +9,7 @@ import RecommendationDetails from './recommendation-details';
 import { Button } from './ui/button';
 import ComparisonView from './comparison-view';
 import { useToast } from '@/hooks/use-toast';
+import JumpingRobot from './jumping-robot';
 
 type Recommendation = InsuranceRecommendationOutput['recommendations'][0];
 
@@ -65,7 +66,10 @@ const Hero = () => {
     : recommendations?.recommendations.slice(0, 3);
 
   return (
-    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-background">
+    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-gradient-to-br from-background to-blue-900/20 shadow-inner-lg">
+       <JumpingRobot className="absolute top-10 left-10" />
+       <JumpingRobot className="absolute top-20 right-20" animationDelay="0.5s" />
+       <JumpingRobot className="absolute bottom-10 right-1/4" animationDelay="1s" />
       <div className="container mx-auto px-4 pt-12 md:pt-20 lg:pt-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left relative">
