@@ -66,7 +66,7 @@ const Hero = () => {
     : recommendations?.recommendations.slice(0, 3);
 
   return (
-    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-gradient-to-br from-background to-blue-900/20 shadow-inner-lg">
+    <section id="hero" className="relative overflow-hidden pb-12 md:pb-20 lg:pb-24 bg-gradient-to-br from-background to-blue-900/30 shadow-inner-lg">
        <JumpingRobot className="absolute top-10 left-10" />
        <JumpingRobot className="absolute top-20 right-20" animationDelay="0.5s" />
        <JumpingRobot className="absolute bottom-10 right-1/4" animationDelay="1s" />
@@ -126,11 +126,11 @@ const Hero = () => {
           </div>
         )}
       </div>
-      <div className="absolute bottom-0 left-0 w-full text-white">
-          <svg viewBox="0 -20 700 110" width="100%" height="110" preserveAspectRatio="none">
-            <path transform="translate(0, -20)" d="M0,10 c80,-22 240,0 350,18 c90,17 260,7.5 350,-20 v50 h-700" fill="#ffffff" />
-            <path d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z" fill="#1e1b4b" />
-        </svg>
+      <div className="absolute bottom-0 left-0 w-full h-[100px] text-white overflow-hidden">
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="h-full w-full">
+            <path d="M0,120 L1440,0 V120 H0 Z" className="fill-blue-900/30" />
+            <path d="M0,120 L1440,30 V120 H0 Z" className="fill-blue-900/20" />
+          </svg>
       </div>
       <RecommendationDetails 
         recommendation={selectedRecommendation}

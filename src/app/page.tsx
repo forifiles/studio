@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <div className="bg-blue-900/20 text-foreground">
+        <div className="bg-blue-900/30 text-foreground">
             <div className="container mx-auto px-4">
                 <InsuranceTypes />
             </div>
