@@ -7,7 +7,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDQDpBREhWI569dm1Yzf1Tbgv0seJgvmWI",
   authDomain: "assureview.firebaseapp.com",
   projectId: "assureview",
-  storageBucket: "assureview.firebasestorage.app",
+  storageBucket: "assureview.appspot.com",
   messagingSenderId: "534692594790",
   appId: "1:534692594790:web:697d9b7fd4af5fbb0ad9a7",
 };
