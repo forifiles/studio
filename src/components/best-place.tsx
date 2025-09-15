@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { BadgePercent, Bot, Building, FileText, ShoppingCart } from 'lucide-react';
+import { BadgePercent, Bot, Columns, FileText, ShoppingCart } from 'lucide-react';
 
 const features = [
   {
@@ -31,7 +31,7 @@ const features = [
     description: 'to help',
   },
   {
-    icon: <Building className="w-12 h-12 text-primary" />,
+    icon: <Columns className="w-12 h-12 text-primary" />,
     title: 'Side by side comparisons',
     description: 'from top insurers',
   },
