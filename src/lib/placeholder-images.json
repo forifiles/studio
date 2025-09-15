@@ -2,44 +2,44 @@
 {
   "hero": [
     {
-      "src": "https://picsum.photos/seed/nigeria-hero-1/1920/1080",
+      "src": "https://picsum.photos/seed/family-fun/1920/1080",
       "alt": "A family feeling secure and happy",
       "data-ai-hint": "family security"
     },
     {
-      "src": "https://picsum.photos/seed/nigeria-hero-2/1920/1080",
+      "src": "https://picsum.photos/seed/healthy-life/1920/1080",
       "alt": "A person engaging in a healthy lifestyle activity",
       "data-ai-hint": "health wellness"
     },
     {
-      "src": "https://picsum.photos/seed/nigeria-hero-3/1920/1080",
+      "src": "https://picsum.photos/seed/travel-joy/1920/1080",
       "alt": "A scenic travel destination with a person looking on",
       "data-ai-hint": "safe travel"
     },
     {
-      "src": "https://picsum.photos/seed/nigeria-hero-4/1920/1080",
+      "src": "https://picsum.photos/seed/home-safe/1920/1080",
       "alt": "A house with a protective shield icon over it",
       "data-ai-hint": "property protection"
     },
     {
-      "src": "https://picsum.photos/seed/nigeria-hero-5/1920/1080",
+      "src": "https://picsum.photos/seed/future-plan/1920/1080",
       "alt": "A person reviewing financial documents for their future",
       "data-ai-hint": "financial planning"
     }
   ],
   "motor": {
     "hero": {
-      "src": "https://picsum.photos/seed/motor-hero-1/400/300",
+      "src": "https://picsum.photos/seed/new-motor-hero/400/300",
       "alt": "Illustration of a car protected by an umbrella and a checklist",
       "data-ai-hint": "car protection"
     },
     "theft": {
-      "src": "https://picsum.photos/seed/motor-theft-1/400/300",
+      "src": "https://picsum.photos/seed/new-motor-theft/400/300",
       "alt": "Illustration of a person trying to break into a car",
       "data-ai-hint": "car security"
     },
     "policy": {
-      "src": "https://picsum.photos/seed/motor-policy-1/400/300",
+      "src": "https://picsum.photos/seed/new-motor-policy/400/300",
       "alt": "Illustration of a person reviewing an insurance policy document with a magnifying glass.",
       "data-ai-hint": "document review"
     }
