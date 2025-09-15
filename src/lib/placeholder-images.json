@@ -3,28 +3,28 @@
   "hero": [
     {
       "src": "https://picsum.photos/seed/nigeria-hero-1/1920/1080",
-      "alt": "A vibrant view of a modern city in Nigeria",
-      "data-ai-hint": "modern city"
+      "alt": "A family feeling secure and happy",
+      "data-ai-hint": "family security"
     },
     {
       "src": "https://picsum.photos/seed/nigeria-hero-2/1920/1080",
-      "alt": "A happy person using their phone",
-      "data-ai-hint": "happy person"
+      "alt": "A person engaging in a healthy lifestyle activity",
+      "data-ai-hint": "health wellness"
     },
     {
       "src": "https://picsum.photos/seed/nigeria-hero-3/1920/1080",
-      "alt": "The Lekki-Ikoyi Link Bridge in Lagos",
-      "data-ai-hint": "Lagos bridge"
+      "alt": "A scenic travel destination with a person looking on",
+      "data-ai-hint": "safe travel"
     },
     {
       "src": "https://picsum.photos/seed/nigeria-hero-4/1920/1080",
-      "alt": "A family enjoying a sunny day",
-      "data-ai-hint": "happy family"
+      "alt": "A house with a protective shield icon over it",
+      "data-ai-hint": "property protection"
     },
     {
       "src": "https://picsum.photos/seed/nigeria-hero-5/1920/1080",
-      "alt": "An architectural landmark in Abuja",
-      "data-ai-hint": "Abuja landmark"
+      "alt": "A person reviewing financial documents for their future",
+      "data-ai-hint": "financial planning"
     }
   ],
   "motor": {
