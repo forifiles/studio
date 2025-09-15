@@ -2,46 +2,46 @@
 {
   "hero": [
     {
-      "src": "https://picsum.photos/seed/family-fun/1920/1080",
+      "src": "https://picsum.photos/seed/family-security/1920/1080",
       "alt": "A family feeling secure and happy",
       "data-ai-hint": "family security"
     },
     {
-      "src": "https://picsum.photos/seed/healthy-life/1920/1080",
+      "src": "https://picsum.photos/seed/health-wellness/1920/1080",
       "alt": "A person engaging in a healthy lifestyle activity",
       "data-ai-hint": "health wellness"
     },
     {
-      "src": "https://picsum.photos/seed/travel-joy/1920/1080",
+      "src": "https://picsum.photos/seed/safe-travel/1920/1080",
       "alt": "A scenic travel destination with a person looking on",
       "data-ai-hint": "safe travel"
     },
     {
-      "src": "https://picsum.photos/seed/home-safe/1920/1080",
+      "src": "https://picsum.photos/seed/property-protection/1920/1080",
       "alt": "A house with a protective shield icon over it",
       "data-ai-hint": "property protection"
     },
     {
-      "src": "https://picsum.photos/seed/future-plan/1920/1080",
+      "src": "https://picsum.photos/seed/financial-planning/1920/1080",
       "alt": "A person reviewing financial documents for their future",
       "data-ai-hint": "financial planning"
     }
   ],
   "motor": {
     "hero": {
-      "src": "https://picsum.photos/seed/car-safety-hero/400/300",
+      "src": "https://picsum.photos/seed/car-protection-illustration/400/300",
       "alt": "Illustration of a car protected by an umbrella and a checklist",
-      "data-ai-hint": "car protection"
+      "data-ai-hint": "car protection illustration"
     },
     "theft": {
-      "src": "https://picsum.photos/seed/car-alert/400/300",
+      "src": "https://picsum.photos/seed/car-theft-illustration/400/300",
       "alt": "Illustration of a person trying to break into a car",
-      "data-ai-hint": "car security"
+      "data-ai-hint": "car theft illustration"
     },
     "policy": {
-      "src": "https://picsum.photos/seed/insurance-doc/400/300",
+      "src": "https://picsum.photos/seed/insurance-document-illustration/400/300",
       "alt": "Illustration of a person reviewing an insurance policy document with a magnifying glass.",
-      "data-ai-hint": "document review"
+      "data-ai-hint": "insurance document illustration"
     }
   }
 }
