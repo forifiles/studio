@@ -12,8 +12,10 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <div className="container mx-auto px-4">
+            <InsuranceTypes />
+        </div>
         <BestPlace />
-        <InsuranceTypes />
         <HowItWorks />
         <Faq />
       </main>

@@ -1,0 +1,30 @@
+
+{
+  "hero": [
+    {
+      "src": "https://picsum.photos/seed/nigeria-hero-1/1920/1080",
+      "alt": "A vibrant view of a modern city in Nigeria",
+      "data-ai-hint": "modern city"
+    },
+    {
+      "src": "https://picsum.photos/seed/nigeria-hero-2/1920/1080",
+      "alt": "A happy person using their phone",
+      "data-ai-hint": "happy person"
+    },
+    {
+      "src": "https://picsum.photos/seed/nigeria-hero-3/1920/1080",
+      "alt": "The Lekki-Ikoyi Link Bridge in Lagos",
+      "data-ai-hint": "Lagos bridge"
+    },
+    {
+      "src": "https://picsum.photos/seed/nigeria-hero-4/1920/1080",
+      "alt": "A family enjoying a sunny day",
+      "data-ai-hint": "happy family"
+    },
+    {
+      "src": "https://picsum.photos/seed/nigeria-hero-5/1920/1080",
+      "alt": "An architectural landmark in Abuja",
+      "data-ai-hint": "Abuja landmark"
+    }
+  ]
+}
