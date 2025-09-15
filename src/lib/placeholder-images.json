@@ -37,6 +37,11 @@
       "src": "https://picsum.photos/seed/motor-theft-1/400/300",
       "alt": "Illustration of a person trying to break into a car",
       "data-ai-hint": "car theft"
+    },
+    "policy": {
+      "src": "https://picsum.photos/seed/motor-policy-1/400/300",
+      "alt": "Illustration of a person reviewing an insurance policy document with a magnifying glass.",
+      "data-ai-hint": "insurance policy"
     }
   }
 }
