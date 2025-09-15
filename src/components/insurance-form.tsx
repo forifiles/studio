@@ -37,7 +37,7 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
     resolver: zodResolver(formSchema),
     defaultValues: {
       age: 30,
-      income: 50000,
+      income: 500000,
       familyStatus: 'single',
       coverageNeeds: 'Looking for comprehensive coverage with a balance of cost and benefits.',
       insuranceType: 'health',
@@ -107,7 +107,7 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
                   <FormItem>
                     <FormLabel>Annual Income</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="e.g., 50000" {...field} />
+                      <Input type="number" placeholder="e.g., 500000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -214,7 +214,7 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
                     <FormItem>
                       <FormLabel>Value of Car</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="e.g., 20000" {...field} value={field.value ?? 0} />
+                        <Input type="number" placeholder="e.g., 2000000" {...field} value={field.value ?? 0} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
