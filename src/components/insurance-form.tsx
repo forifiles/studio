@@ -78,7 +78,7 @@ const InsuranceForm = ({ setRecommendations, setIsLoading, isLoading }: Insuranc
   }
 
   return (
-    <Card className="shadow-lg bg-card/80 backdrop-blur-sm">
+    <Card className="shadow-lg bg-card">
       <CardHeader>
         <CardTitle className="font-headline text-2xl">Get Your AI Recommendation</CardTitle>
         <CardDescription>Fill in your details to receive personalized insurance options.</CardDescription>

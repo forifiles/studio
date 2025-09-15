@@ -22,7 +22,7 @@ const RecommendationCard = ({ recommendation, onViewDetails, onCompareSelect, is
 
   return (
     <Card 
-      className="flex flex-col h-full transform transition-all duration-300 hover:shadow-2xl bg-card/80 backdrop-blur-sm"
+      className="flex flex-col h-full transform transition-all duration-300 hover:shadow-2xl bg-card"
     >
       <div 
         className="flex-grow cursor-pointer"
