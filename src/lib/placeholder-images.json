@@ -31,17 +31,17 @@
     "hero": {
       "src": "https://picsum.photos/seed/motor-hero-1/400/300",
       "alt": "Illustration of a car protected by an umbrella and a checklist",
-      "data-ai-hint": "car insurance"
+      "data-ai-hint": "car protection"
     },
     "theft": {
       "src": "https://picsum.photos/seed/motor-theft-1/400/300",
       "alt": "Illustration of a person trying to break into a car",
-      "data-ai-hint": "car theft"
+      "data-ai-hint": "car security"
     },
     "policy": {
       "src": "https://picsum.photos/seed/motor-policy-1/400/300",
       "alt": "Illustration of a person reviewing an insurance policy document with a magnifying glass.",
-      "data-ai-hint": "insurance policy"
+      "data-ai-hint": "document review"
     }
   }
 }
